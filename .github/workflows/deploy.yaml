@@ -43,7 +43,9 @@ jobs:
 
     - name: Deploy functions
       # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-      run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
+      # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
+      run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --runtime nodejs22 --service-account '${{ secrets.SERVICE_ACCOUNT }}'
+
 
     # Example of using the output
     - id: 'test'
