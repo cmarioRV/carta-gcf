@@ -38,7 +38,7 @@ jobs:
       with:
         project_id: '${{ secrets.PROJECT_ID }}'
         workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
-        #service_account: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_CARTA_C98E1 }}'
+        service_account: '${{ secrets.SERVICE_ACCOUNT }}'
 
     - name: Deploy functions
       # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
