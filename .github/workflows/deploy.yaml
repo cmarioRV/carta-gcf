@@ -51,8 +51,3 @@ jobs:
     # Example of using the output
     - id: 'test'
       run: 'curl "${{ steps.deploy.outputs.url }}"'
-
-
-      gcloud projects add-iam-policy-binding $PROJECT_ID \
-  --member="serviceAccount:$GH_SVC_ACCOUNT_EMAIL" \
-  --role="roles/firebaseextensions.viewer"
