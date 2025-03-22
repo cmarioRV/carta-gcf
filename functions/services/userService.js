@@ -57,7 +57,7 @@ async function createUserInAuth(user) {
     email: email,
     phoneNumber: phoneNumber,
     password: password,
-    displayName: displayName
+    displayName: displayName,
   });
 }
 
