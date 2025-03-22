@@ -37,12 +37,13 @@ jobs:
       uses: 'google-github-actions/auth@v2'
       with:
         project_id: '${{ secrets.PROJECT_ID }}'
+        token_format: access_token
         workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
         service_account: '${{ secrets.SERVICE_ACCOUNT }}'
 
     - name: Deploy functions
-      run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
-      # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
+      # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
+      run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
 
     # Example of using the output
     - id: 'test'
