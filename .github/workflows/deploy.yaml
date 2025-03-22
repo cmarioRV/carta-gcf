@@ -41,6 +41,12 @@ jobs:
         workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
         service_account: '${{ secrets.SERVICE_ACCOUNT }}'
 
+    - name: Run Unit Tests
+      run: cd functions && npm run test
+
+    - name: Run Unit Tests
+      run: cd functions && npm run lint
+
     - name: Deploy functions
       # run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }} --token ${{ secrets.FIREBASE_TOKEN }}
       run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
