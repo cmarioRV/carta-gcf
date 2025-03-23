@@ -3,10 +3,10 @@ run-name: ${{ github.actor }} launched the Build-and-Test workflow 🚀
 on:
   pull_request:
     branches: ["dev", "master"]
-  push:
-    paths:
-      - 'functions/**'
-      - '.github/**'
+  # push:
+  #   paths:
+  #     - 'functions/**'
+  #     - '.github/**'
 
 
 permissions:
