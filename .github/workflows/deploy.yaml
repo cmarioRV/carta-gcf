@@ -1,8 +1,14 @@
 name: Cloud Function Deployment
-
+run-name: ${{ github.actor }} launched the Deploy workflow 🚀
 on:
-  push:
-    branches: ["dev", "master"]
+  workflow_run:
+    workflows: ["Build and Test"] # Run the deploy after successful Build and Test
+    types:
+      - completed
+
+  pull_request:
+    branches:
+      - 'master'
 
 permissions:
   contents: 'read'
@@ -10,28 +16,28 @@ permissions:
   id-token: 'write'
 
 jobs:
-  job_id:
+  deploy_backend_gcf:
     runs-on: 'ubuntu-latest'
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+    # permissions:
+    #   contents: 'read'
+    #   id-token: 'write'
 
     steps:
-    - name: Checkout Repo
-      uses: 'actions/checkout@v4'
+    # - name: Checkout Repo
+    #   uses: 'actions/checkout@v4'
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 22
+    # - name: Setup Node.js
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: 22
 
-    - name: Installing dependencies
-      run: |
-        npm install
-        npm install -g firebase-tools
-        cd functions && npm install
+    # - name: Installing dependencies
+    #   run: |
+    #     npm install
+    #     npm install -g firebase-tools
+    #     cd functions && npm install
 
-    - name: Firebase authentication
+    - name: Authenticate to Google Cloud
       uses: 'google-github-actions/auth@v2'
       with:
         project_id: '${{ secrets.PROJECT_ID }}'
@@ -39,11 +45,11 @@ jobs:
         workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
         service_account: '${{ secrets.SERVICE_ACCOUNT }}'
 
-    - name: Run Unit Tests
-      run: cd functions && npm run test
+    # - name: Run Unit Tests
+    #   run: cd functions && npm run test
 
-    - name: Run Lint Codebase
-      run: cd functions && npm run lint
+    # - name: Run Lint Codebase
+    #   run: cd functions && npm run lint
 
-    - name: Deploy functions
+    - name: Deploy to Google Cloud Functions
       run: firebase deploy --only functions --project ${{ secrets.PROJECT_ID }}
