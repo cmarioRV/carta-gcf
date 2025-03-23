@@ -6,7 +6,7 @@ on:
   push:
     paths:
       - 'functions/**'
-      - '.github/..'
+      - '.github/**'
 
 
 permissions:
