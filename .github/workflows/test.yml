@@ -4,7 +4,8 @@ on:
   pull_request:
     branches: ["dev", "master"]
   push:
-    branches: ["dev", "master"]
+    paths:
+      - 'functions/**'
 
 
 permissions:
